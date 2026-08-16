@@ -1,78 +1,128 @@
-# Portfolio Website by Pabitra Mohan Singh
+markdown
+# ToolPabitraMS
 
-A modern, performant personal portfolio built with Astro, Tailwind CSS, and TypeScript to showcase my skills, experience, and projects.
+ToolPabitraMS is a personal, client-side utility toolkit built with React, TypeScript, and Vite.
 
----
+All processing happens entirely in your browser. Files are never sent to any server. Your data stays private and local.
 
 ## Features
 
-- Dark / Light Theme – client-side toggle with local storage persistence
-- MDX Content Collections – project pages with Zod-validated frontmatter
-- Static Site Generation – fully pre-rendered HTML, zero client-side JavaScript by default
-- SEO Optimized – meta tags, Open Graph, semantic HTML5
-- Fully Responsive – mobile-first layout with Tailwind CSS
-- Blazing Fast – inline critical CSS, HTML compression, no render-blocking scripts
-- Accessible – semantic landmarks, heading hierarchy, skip-to-main-content link
-- TypeScript – end-to-end static type checking
-
----
+- All processing runs locally in your browser – privacy-first, no server uploads
+- Modular tool architecture – add new utilities without touching existing code
+- Offline-ready – works without internet via service workers
+- Clean, responsive design – works on desktop and mobile devices
+- Dark mode support – comfortable viewing in any environment
+- Persistent local storage – files stay saved until you remove them
 
 ## Technology Stack
 
-- Astro 7
-- Tailwind CSS 4
-- TypeScript 5
-- MDX
-- Vite (bundled with Astro)
-- PNPM
-
----
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- Zustand
+- React Router DOM
+- IndexedDB / OPFS
+- Custom Motion Engine
 
 ## Architecture Overview
 
-The codebase follows a component-based architecture designed for clarity and maintainability.
+The codebase follows a layered architecture designed for scalability and maintainability.
 
 ### Core Layers
 
-- **Pages** – Route definitions (`index.astro`, `projects.astro`)
-- **Layouts** – Base layout wrapper (`BaseLayout.astro`)
-- **Components** – Reusable UI pieces (home, projects, layout, ui, seo)
-- **Content** – MDX collections with Zod schema validation
-- **Styles** – Global CSS and custom animations
-- **Types** – TypeScript type definitions
+- **Core** – UI primitives, layout components, global state
+- **Shared** – Reusable components used across tools
+- **Entities** – Domain logic and data models
+- **Tools** – Self-contained feature modules
+- **Lib** – Generic helpers extracted when used in multiple places
+- **Pages** – Route screens
 
-### Key Design Decisions
+### Dependency Flow
 
-- Content Collections keep project data separate from UI logic
-- Static output pre-renders every page at build time
-- Inline stylesheets eliminate extra network requests
-- Component-first approach keeps the codebase modular
+```text
+Pages → Tools → Shared → Core
+           ↓        ↓
+        Entities   Lib
+Core has no dependencies.
+
+Shared imports from Core and Lib only.
+
+Entities imports from Core (types) and Lib only.
+
+Tools import from any layer except Pages.
+
+This hierarchy prevents circular dependencies and keeps the codebase predictable.
+
+Getting Started
+Prerequisites
+Node.js 18 or later
+
+npm or yarn
+
+Installation
+bash
+git clone https://github.com/thepabitrams/toolpabitrams.git
+cd toolpabitrams
+npm install
+Development
+bash
+npm run dev
+Production Build
+bash
+npm run build
+Preview Production Build
+bash
+npm run preview
+How to Add a New Tool
+Create folder: src/tools/<category>/<tool-name>/
+
+Create index.tsx exporting a Tool object:
+
+tsx
+import { Tool } from '@/core/registry/toolRegistry';
+
+const toolDef: Tool = {
+  id: 'my-tool',
+  name: 'My Tool',
+  description: 'Does something useful',
+  category: 'image',
+  input: 'single',
+  component: MyToolComponent,
+};
+
+export default toolDef;
+Implement the component.
+
+Use existing layers (Core, Shared, Entities, Lib) as needed.
+
+The tool auto-registers via dynamic imports.
+
+Folder Structure
+text
+src/
+├── core/          # Foundation: UI primitives, layout, global state
+├── shared/        # Reusable components
+├── entities/      # Domain logic and data models
+├── tools/         # All tools: each feature in its own folder
+├── lib/           # Generic helpers
+└── pages/         # Route screens
+Contributing
+This is a personal toolkit. For forks or adaptations:
+
+Fork the repository.
+
+Create a feature branch.
+
+Commit changes with clear messages.
+
+Open a pull request.
+
+Acknowledgments
+Built with a modular, scalable architecture for maintainability and developer experience.
+
+text
 
 ---
 
-## Dependency Flow
-
-package.json → pnpm install → Node Modules → Astro CLI → Vite Dev Server/Build → Tailwind CSS Vite Plugin + MDX Integration → Static HTML + CSS Output
-
-- PNPM resolves all dependencies from package.json
-- Astro orchestrates the build process
-- Vite handles bundling and hot-module replacement
-- Tailwind CSS Vite plugin processes utility classes
-- MDX integration transforms .mdx files into components
-- Final output is static HTML, CSS, and minimal JavaScript (only for theme toggle)
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 22.12.0 or later
-- PNPM 9.0 or later
-
-### Installation
-
-```bash
-git clone https://github.com/thepabitrams/pabitramohansingh.git
-cd pabitramohansingh
-pnpm install
+That's **the whole file** – no extra words. Now you can paste it and it will render perfectly. Sorry for the earlier headache – this one is clean, bro. 💪
