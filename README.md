@@ -1,48 +1,46 @@
 
-# ToolPabitraMS
+# Portfolio Website by Pabitra Mohan Singh
 
-ToolPabitraMS is a personal, client-side utility toolkit built with React, TypeScript, and Vite.
-
-All processing happens entirely in your browser. Files are never sent to any server. Your data stays private and local.
+A modern, performant personal portfolio built with Astro, Tailwind CSS, and TypeScript to showcase my skills, experience, and projects.
 
 ---
 
 ## Features
 
-- All processing runs locally in your browser – privacy-first, no server uploads
-- Modular tool architecture – add new utilities without touching existing code
-- Offline-ready – works without internet via service workers
-- Clean, responsive design – works on desktop and mobile devices
-- Dark mode support – comfortable viewing in any environment
-- Persistent local storage – files stay saved until you remove them
+- Dark / Light Theme – client-side toggle with local storage persistence
+- MDX Content Collections – project pages with Zod-validated frontmatter
+- Static Site Generation – fully pre-rendered HTML, zero client-side JavaScript by default
+- SEO Optimized – meta tags, Open Graph, semantic HTML5
+- Fully Responsive – mobile-first layout with Tailwind CSS
+- Blazing Fast – inline critical CSS, HTML compression, no render-blocking scripts
+- Accessible – semantic landmarks, heading hierarchy, skip-to-main-content link
+- TypeScript – end-to-end static type checking
 
 ---
 
 ## Technology Stack
 
-- React 18
-- TypeScript
-- Vite
-- Tailwind CSS
-- Zustand
-- React Router DOM
-- IndexedDB / OPFS
-- Custom Motion Engine
+- Astro 7
+- Tailwind CSS 4
+- TypeScript 5
+- MDX
+- Vite (bundled with Astro)
+- PNPM
 
 ---
 
 ## Architecture Overview
 
-The codebase follows a layered architecture designed for scalability and maintainability.
+The codebase follows a component-based architecture designed for clarity and maintainability.
 
 ### Core Layers
 
-- **Core** – UI primitives, layout components, global state
-- **Shared** – Reusable components used across tools
-- **Entities** – Domain logic and data models
-- **Tools** – Self-contained feature modules
-- **Lib** – Generic helpers extracted when used in multiple places
-- **Pages** – Route screens
+- **Pages** – Route definitions (`index.astro`, `projects.astro`)
+- **Layouts** – Base layout wrapper (`BaseLayout.astro`)
+- **Components** – Reusable UI pieces (home, projects, layout, ui, seo)
+- **Content** – MDX collections with Zod schema validation
+- **Styles** – Global CSS and custom animations
+- **Types** – TypeScript type definitions
 
 ### Dependency Flow
 
@@ -65,33 +63,33 @@ This hierarchy prevents circular dependencies and keeps the codebase predictable
 ## Getting Started
 
 ### Prerequisites
-    Node.js 18 or later
-    npm or yarn
+ Node.js 22.12.0 or later
+ PNPM 9.0 or later
 
 ### Installation
 
 ```bash
-git clone https://github.com/thepabitrams/toolpabitrams.git
-cd toolpabitrams
-npm install
+git clone https://github.com/thepabitrams/pabitramohansingh.git
+cd pabitramohansingh
+pnpm install
 ```
 
 ### Development
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ### Production Build
 
 ```bash
-npm run build
+pnpm build
 ```
 
 ### Preview Production Build
 
 ```bash
-npm run preview
+pnpm preview
 ```
 ---
 
@@ -109,3 +107,7 @@ npm run preview
 
 ## Acknowledgements
 Built with Astro, Tailwind CSS, and TypeScript. Built with a modular, scalable architecture for maintainability and developer experience.
+
+---
+
+Made by Pabitra Mohan Singh
