@@ -1,0 +1,10 @@
+This project includes software developed by:
+
+- TypeScript (https://www.typescriptlang.org) – Apache License 2.0
+  Portions of this software are Copyright (c) Microsoft Corporation.
+
+- Astro (https://astro.build) – MIT License
+- Tailwind CSS (https://tailwindcss.com) – MIT License
+- Other dependencies are licensed under the MIT license.
+
+Full license texts are available in the third-party/ folder.

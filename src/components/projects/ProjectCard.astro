@@ -1,0 +1,95 @@
+---
+export interface Props {
+  project: {
+    slug: string;
+    data: {
+      title: string;
+      description: string;
+      techStack?: string[];
+      image?: string;
+      liveUrl?: string;
+      githubUrl?: string;
+    };
+  };
+  delay?: number;
+}
+const { project, delay = 0 } = Astro.props;
+const p = project.data;
+const slug = project.slug;
+---
+
+<div
+  class="project-card-item bg-white dark:bg-neutral-900 rounded-xl border border-neutral-200 dark:border-white/10 overflow-hidden shadow-sm hover:shadow-xl dark:shadow-white/5 dark:hover:shadow-white/20 transition-all duration-300 flex flex-col animate-on-load animate-slide-bottom"
+  style={`animation-delay: ${delay}s`}
+  data-title={p.title}
+  data-desc={p.description}
+  data-tags={p.techStack?.join(' ') || ''}
+>
+  <div class="aspect-video bg-neutral-100 dark:bg-neutral-800 overflow-hidden relative">
+    {p.image ? (
+      <img
+        src={p.image}
+        alt={p.title}
+        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <div class="w-full h-full flex items-center justify-center text-neutral-400 dark:text-neutral-600 text-sm">
+        🖼️ No image
+      </div>
+    )}
+  </div>
+
+  <div class="p-4 flex-1 flex flex-col">
+    <h3 class="text-xl font-semibold text-neutral-900 dark:text-white">
+      {p.title}
+    </h3>
+    <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1 flex-1 line-clamp-3">
+      {p.description}
+    </p>
+
+    {p.techStack?.length > 0 && (
+      <div class="flex flex-wrap gap-1.5 mt-3">
+        {p.techStack.map(tag => (
+          <span
+            key={tag}
+            class="text-xs px-2.5 py-0.5 rounded-full bg-neutral-100 dark:bg-white/10 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-white/5"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <div class="flex flex-wrap items-center gap-2 mt-4 pt-3 border-t border-neutral-100 dark:border-white/5">
+      {p.liveUrl && (
+        <a
+          href={p.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs px-3 py-1.5 rounded-full bg-primary text-white hover:bg-primary-dark transition-colors focus-ring"
+        >
+          Live Demo
+        </a>
+      )}
+      {p.githubUrl && (
+        <a
+          href={p.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-xs px-3 py-1.5 rounded-full border border-neutral-300 dark:border-white/20 hover:bg-neutral-100 dark:hover:bg-white/10 transition-colors focus-ring"
+        >
+          Source Code
+        </a>
+      )}
+
+      <label
+        for={`about-${slug}`}
+        class="text-xs px-3 py-1.5 rounded-full border border-neutral-300 dark:border-white/20 hover:bg-neutral-100 dark:hover:bg-white/10 transition-colors cursor-pointer ml-auto"
+      >
+        About
+      </label>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+---
+import ThemeToggle from '../interactive/ThemeToggle.astro';
+---
+
+<header class="sticky top-0 z-40 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-800">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-end">
+    <nav class="flex items-center gap-6 text-sm">
+      <a href="/" class="text-neutral-600 dark:text-neutral-300 hover:text-primary transition">Home</a>
+      <a href="/projects" class="text-neutral-600 dark:text-neutral-300 hover:text-primary transition">Projects</a>
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>

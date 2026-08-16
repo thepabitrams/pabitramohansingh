@@ -1,0 +1,15 @@
+---
+const isHome = Astro.url.pathname === '/';
+---
+
+<footer class="border-t border-neutral-200 dark:border-neutral-800 mt-16 py-6 text-center text-sm text-neutral-500 dark:text-neutral-400">
+  <p>© 2026 Pabitra Mohan Singh</p>
+
+  {!isHome && (
+    <div class="flex justify-center gap-4 mt-2">
+      <a href="https://github.com/thepabitrams" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition">GitHub</a>
+      <a href="https://x.com/learnpabitrams" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition">Twitter</a>
+      <a href="mailto:contactpabitrams@gmail.com" class="hover:text-primary transition">Contact Me</a>
+    </div>
+  )}
+</footer>

@@ -1,0 +1,24 @@
+---
+import HeroBio from './HeroBio.astro';
+import HeroProfile from './HeroProfile.astro';
+import HeroExperience from './HeroExperience.astro';
+import SocialIcons from './SocialIcons.astro';
+---
+
+<section class="py-16 md:py-24 max-w-6xl mx-auto px-4 sm:px-6">
+  <!-- Row: Bio (Left) + Profile (Right) -->
+  <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+    <HeroBio />
+    <HeroProfile />
+  </div>
+  
+  <!-- Social Icons – slide from LEFT, more top space -->
+  <div class="mt-12 flex justify-center md:justify-start animate-on-load animate-slide-left delay-3">
+    <SocialIcons />
+  </div>
+  
+  <!-- Experience – slide from BOTTOM, more top space with clean border -->
+  <div class="mt-16">
+    <HeroExperience />
+  </div>
+</section>
