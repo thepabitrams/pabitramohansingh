@@ -1,16 +1,72 @@
 ---
+import ProjectFilter from './ProjectFilter.astro';
+import ProjectSearch from './ProjectSearch.astro';
+import ProjectCard from './ProjectCard.astro';
+
 export interface Props {
-  title?: string;
-  subtitle?: string;
+  entries: Array<{
+    slug: string;
+    data: any;
+    body?: string;
+  }>;
 }
-const { title = "Projects", subtitle = "A selection of projects that demonstrate my skills, passion and experience." } = Astro.props;
+const { entries } = Astro.props;
+
+const projectDataForClient = entries.map(e => ({
+  slug: e.slug,
+  ...e.data,
+  body: e.body || '',
+}));
 ---
 
-<div class="animate-on-load animate-slide-left delay-1 mb-10">
-  <h1 class="text-4xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white">
-    {title}
-  </h1>
-  <p class="text-lg text-neutral-600 dark:text-neutral-400 mt-2 max-w-2xl">
-    {subtitle}
-  </p>
+<script define:vars={{ projectDataForClient }}>
+  window.__PROJECTS_DATA = projectDataForClient;
+</script>
+
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-neutral-200 dark:border-white/10">
+  <ProjectSearch />
+  <ProjectFilter />
 </div>
+
+<div class="animate-on-load animate-slide-bottom delay-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="project-grid">
+    {entries.map((entry, index) => {
+      const delay = (index % 6 + 1) * 0.05 + 0.3;
+      return <ProjectCard project={entry} delay={delay} />;
+    })}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('project-search');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card-item');
+
+    function filterProjects() {
+      const query = searchInput.value.toLowerCase().trim();
+      const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+
+      cards.forEach(card => {
+        const title = card.dataset.title?.toLowerCase() || '';
+        const desc = card.dataset.desc?.toLowerCase() || '';
+        const tags = card.dataset.tags?.toLowerCase() || '';
+
+        const matchesSearch = title.includes(query) || desc.includes(query) || tags.includes(query);
+        const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+
+        card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active', 'bg-primary', 'text-white', 'border-primary'));
+        btn.classList.add('active', 'bg-primary', 'text-white', 'border-primary');
+        filterProjects();
+      });
+    });
+
+    searchInput.addEventListener('input', filterProjects);
+  });
+</script>
