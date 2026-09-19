@@ -1,0 +1,31 @@
+---
+import ThemeToggle from '../components/interactive/ThemeToggle.astro';
+
+const currentPath = Astro.url.pathname;
+const navLinks = [
+  { href: '/home', label: 'Home' },
+  { href: '/projects', label: 'Projects' },
+];
+---
+
+<header class="sticky top-0 z-40 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-800">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-end">
+    <nav class="flex items-center gap-6 text-sm">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'transition',
+            currentPath === link.href
+              ? 'text-primary'
+              : 'text-neutral-600 dark:text-neutral-300 hover:text-primary',
+          ]}
+          aria-current={currentPath === link.href ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>

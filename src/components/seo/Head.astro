@@ -2,10 +2,15 @@
 export interface Props {
   title: string;
   description?: string;
-  image?: string;
-  url?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
 }
-const { title, description = "Pabitra Mohan Singh – Staff Software Engineer", image = "/og-image.png", url = "https://pabitrasingh.dev" } = Astro.props;
+const {
+  title,
+  description = "MS Computer Science Student passionate about software engineering and AI.",
+  ogImage = "https://pabitramohansingh.pages.dev/og-image.png",
+  canonicalUrl = "https://pabitramohansingh.pages.dev",
+} = Astro.props;
 ---
 
 <meta charset="UTF-8" />
@@ -16,22 +21,22 @@ const { title, description = "Pabitra Mohan Singh – Staff Software Engineer", 
 
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={image} />
-<meta property="og:url" content={url} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:url" content={canonicalUrl} />
 <meta property="og:type" content="website" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={image} />
+<meta name="twitter:image" content={ogImage} />
 
-<link rel="canonical" href={url} />
+<link rel="canonical" href={canonicalUrl} />
 
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Pabitra Mohan Singh",
-  "url": "https://pabitrasingh.dev",
+  "url": "https://pabitramohansingh.pages.dev",
   "sameAs": [
     "https://github.com/thepabitrams",
     "https://www.linkedin.com/in/pabitramohansingh",
@@ -39,6 +44,5 @@ const { title, description = "Pabitra Mohan Singh – Staff Software Engineer", 
     "https://youtube.com/@learnpabitrams",
     "https://www.instagram.com/learnpabitrams"
   ],
-  "jobTitle": "Staff Software Engineer",
-})}
-/>
+  "jobTitle": "MS Computer Science Student"
+})} />

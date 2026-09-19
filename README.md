@@ -36,7 +36,7 @@ The codebase follows a component-based architecture designed for clarity and mai
 ### Core Layers
 
 - **Pages** – Route definitions (`index.astro`, `projects.astro`)
-- **Layouts** – Base layout wrapper (`BaseLayout.astro`)
+- **Layouts** – Page shells and shared layout pieces (BaseLayout.astro, Header.astro, Footer.astro)
 - **Components** – Reusable UI pieces (home, projects, layout, ui, seo)
 - **Content** – MDX collections with Zod schema validation
 - **Styles** – Global CSS and custom animations
