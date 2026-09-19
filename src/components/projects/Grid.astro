@@ -1,0 +1,33 @@
+---
+import Card from './Card.astro';
+
+export interface Props {
+  entries: Array<{
+    slug: string;
+    data: any;
+    body?: string;
+  }>;
+}
+const { entries } = Astro.props;
+
+const projectData = entries.map((entry) => ({
+  slug: entry.slug,
+  ...entry.data,
+  body: entry.body || '',
+}));
+---
+
+<script define:vars={{ projectData }}>
+  window.__PROJECTS_DATA = projectData;
+</script>
+
+<div class="pb-0 mb-8 border-b border-neutral-200 dark:border-white/10"></div>
+
+<div class="animate-on-load animate-slide-bottom delay-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="project-grid">
+    {entries.map((entry, index) => {
+      const animationDelay = (index % 6 + 1) * 0.05 + 0.3;
+      return <Card project={entry} delay={animationDelay} />;
+    })}
+  </div>
+</div>

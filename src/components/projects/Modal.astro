@@ -15,23 +15,23 @@ const aboutModules = import.meta.glob('../../content/projects/*/_about.mdx', {
 });
 
 const aboutMap = new Map<string, any>();
-for (const [path, module] of Object.entries(aboutModules)) {
+for (const [path, aboutModule] of Object.entries(aboutModules)) {
   const slug = path.split('/').slice(-2, -1)[0];
-  aboutMap.set(slug, module);
+  aboutMap.set(slug, aboutModule);
 }
 ---
 
 {entries.map((entry) => {
-  const slug = entry.slug;
-  const p = entry.data;
-  const mdxModule = aboutMap.get(slug);
-  const Content = mdxModule?.Content;
+  const projectSlug = entry.slug;
+  const projectData = entry.data;
+  const aboutModule = aboutMap.get(projectSlug);
+  const AboutContent = aboutModule?.Content;
 
   return (
     <>
       <input
         type="checkbox"
-        id={`about-${slug}`}
+        id={`about-${projectSlug}`}
         class="hidden about-toggle"
       />
 
@@ -44,11 +44,11 @@ for (const [path, module] of Object.entries(aboutModules)) {
 
             <div class="flex items-center justify-between py-4 md:py-6 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-10 bg-white dark:bg-neutral-900">
               <h2 class="text-xl md:text-2xl font-bold text-neutral-900 dark:text-white truncate pr-4">
-                {p.title}
+                {projectData.title}
               </h2>
 
               <label
-                for={`about-${slug}`}
+                for={`about-${projectSlug}`}
                 class="p-1.5 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer flex-shrink-0"
                 aria-label="Close"
               >
@@ -59,9 +59,9 @@ for (const [path, module] of Object.entries(aboutModules)) {
             </div>
 
             <div class="py-6 md:py-8 overflow-y-auto flex-1">
-              {Content ? (
+              {AboutContent ? (
                 <div class="prose prose-neutral dark:prose-invert max-w-none">
-                  <Content />
+                  <AboutContent />
                 </div>
               ) : (
                 <p class="text-neutral-500 dark:text-neutral-400">No about content available.</p>

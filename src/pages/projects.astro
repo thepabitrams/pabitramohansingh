@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectWrapper from '../components/projects/ProjectWrapper.astro';
-import ProjectAbout from '../components/projects/ProjectAbout.astro';
+import Grid from '../components/projects/Grid.astro';
+import Modal from '../components/projects/Modal.astro';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
@@ -24,12 +24,12 @@ const entries = projects.map((entry) => ({
       </p>
     </div>
 
-    <ProjectWrapper entries={entries} />
+    <Grid entries={entries} />
     
     {entries.length === 0 && (
       <p class="text-center text-red-500 mt-10">⚠️ No projects found. Check your content folder.</p>
     )}
 
-    <ProjectAbout entries={entries} />
+    <Modal entries={entries} />
   </section>
 </BaseLayout>
